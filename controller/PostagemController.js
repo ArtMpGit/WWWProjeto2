@@ -18,9 +18,8 @@ const post = async(req, res) => {
 
 const put = async(req, res) => {
     try {
-        const id = req.params.id;
         const { conteudo } = req.body;
-        const postagem = await db.update(id, { conteudo });
+        const postagem = await db.update(req.params.id, { conteudo });
         res.status(201).json(postagem);
     } catch (error) {
         res.status(500).json(error);
@@ -29,8 +28,7 @@ const put = async(req, res) => {
 
 const deletePost = async(req, res) => {
     try {
-        const id = req.params.id;
-        await db.delete(id);
+        await db.delete(req.params.id);
         res.status(200).json();
     } catch (error) {
         res.status(500).json(error);
